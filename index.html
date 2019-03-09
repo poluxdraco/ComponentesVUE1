@@ -11,6 +11,10 @@
  
     <script src="./componentes/mensaje.js"></script>
     <script src="./componentes/computed-properties.js"></script>
+    <script src="./componentes/render-list.js"></script>
+    <script src="./componentes/eventos.js"></script>
+    <script src="./componentes/parent-name.js"></script>
+    <script src="./componentes/child-data.js"></script>
 </head>
 
 <body>
@@ -18,14 +22,36 @@
     
     <main id="app">
         <mensaje></mensaje>
+        <hr>
         <computed-properties></computed-properties>
+        <hr>
+        <render-list></render-list>
+        <hr>
+        <eventos @mi-evento="myEvent"></eventos>
+        {{ dataEvent }}
+        <hr>
+        <parent-name></parent-name>
+        <hr>
+        <child-data ref="childC"></child-data>
+         Dato: {{ dataChild }}
     </main>
 
     <script>
         const app = new Vue({
             el: '#app',
             data: {
-
+             appName: "Ejemplos con Vue",
+             dataChild: "",
+             dataEvent:""
+            },
+            methods: {
+                myEvent(mensaje){
+                    this.dataEvent=mensaje
+                    //console.log(mensaje)
+                }
+            },
+            mounted() {
+                this.dataChild=this.$refs.childC.mensaje2
             }
         })
     </script>
