@@ -8,18 +8,22 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
- 
+
     <script src="./componentes/mensaje.js"></script>
     <script src="./componentes/computed-properties.js"></script>
     <script src="./componentes/render-list.js"></script>
     <script src="./componentes/eventos.js"></script>
     <script src="./componentes/parent-name.js"></script>
     <script src="./componentes/child-data.js"></script>
+    <script src="./componentes/child-method.js"></script>
+    <script src="./componentes/slots.js"></script>
+    <script src="./componentes/parametros.js"></script>
+    <script src="./componentes/comunicacion.js"></script>
 </head>
 
 <body>
     <h1>Ejemplos con componentes</h1>
-    
+
     <main id="app">
         <mensaje></mensaje>
         <hr>
@@ -33,25 +37,55 @@
         <parent-name></parent-name>
         <hr>
         <child-data ref="childC"></child-data>
-         Dato: {{ dataChild }}
+        Dato: {{ dataChild }}
+        <hr>
+
+
+        <child-method ref="childM"></child-method>
+        <hr>
+
+        <slots>
+            <p> Todo lo q se escriba aqui va al main</p>
+            <template slot="header">
+                <h5>Cabecera inyectada por Slot</h5>
+            </template>
+
+            <template slot="footer">
+                <h6>Pie inyectada por Slot</h6>
+                bl ala nña
+            </template>
+        </slots>
+        <hr>
+
+        <parametros name="LUIS" city="MILAN"></parametros>
+        <hr>
+
+        <comp1></comp1>
+        <comp2></comp2>
+
+  
     </main>
 
     <script>
+            
         const app = new Vue({
             el: '#app',
             data: {
-             appName: "Ejemplos con Vue",
-             dataChild: "",
-             dataEvent:""
+                appName: "Ejemplos con Vue",
+                dataChild: "",
+                dataEvent: ""
+                
+
             },
             methods: {
-                myEvent(mensaje){
-                    this.dataEvent=mensaje
+                myEvent(mensaje) {
+                    this.dataEvent = mensaje
                     //console.log(mensaje)
                 }
             },
             mounted() {
-                this.dataChild=this.$refs.childC.mensaje2
+                this.dataChild = this.$refs.childC.mensaje2
+                this.$refs.childM.showMethodChild()
             }
         })
     </script>
